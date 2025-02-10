@@ -1,0 +1,43 @@
+#CustomTea that allows the customers to customize a tea blend
+# by choosing a base and add additional flavors of their choosing
+from Tea import *
+
+class CustomTea(Tea):
+    def __init__(self, size, base):
+        super().__init__(size)
+        self.base = base
+        self.flavors_list = ""
+        if self.getSize() == "S":
+            self.setPrice(10.00)
+        elif self.getSize() == "M":
+            self.setPrice(15.00)
+        elif self.getSize() == "L":
+            self.setPrice(20.00)
+
+
+    def setBase(self, base):
+        self.base = base
+
+    def getBase(self):
+        return self.base
+
+    def addFlavor(self, flavor):
+        self.flavors_list += "\t+ " + flavor + "\n"
+        #self.flavors.append("\t+" + flavor)
+        #self.flavors += "\t+" + flavor + "\n"
+        if self.getSize() == "S":
+            self.setPrice(self.getPrice() + 0.25)
+        if self.getSize() == "M":
+            self.setPrice(self.getPrice() + 0.50)
+        if self.getSize() == "L":
+            self.setPrice(self.getPrice() + 0.75)
+
+    def getTeaDetails(self):
+        # return "CUSTOM TEA\n    Size: {}\n    Base: {}\n    Flavors: {}\n    Price ${:0.2f}\n"\
+        return "CUSTOM TEA\n" \
+           "Size: {}\n" \
+           "Base: {}\n" \
+           "Flavors:\n" \
+           "{}" \
+           "Price: ${:0.2f}\n".format(self.size, self.base, self.flavors_list, self.price)
+
